@@ -29,15 +29,21 @@ import sys
 from deephistopath.wsi import util
 from deephistopath.wsi.util import Time
 
-BASE_DIR = os.path.join(".", "data")
-# BASE_DIR = os.path.join(os.sep, "Volumes", "BigData", "TUPAC")
-TRAIN_PREFIX = "TUPAC-TR-"
-SRC_TRAIN_DIR = os.path.join(BASE_DIR, "training_slides")
+# BASE_DIR = os.path.join(".", "data")
+BASE_DIR = os.path.join("..", "data") # MY PATHS
+
+## BASE_DIR = os.path.join(os.sep, "Volumes", "BigData", "TUPAC")
+# TRAIN_PREFIX = "TUPAC-TR-"
+TRAIN_PREFIX = "TEST-TR-" # MY PATHS
+
+# SRC_TRAIN_DIR = os.path.join(BASE_DIR, "training_slides")
+SRC_TRAIN_DIR = os.path.join(BASE_DIR, "manifest_db") # MY PATHS
 SRC_TRAIN_EXT = "svs"
 DEST_TRAIN_SUFFIX = ""  # Example: "train-"
 DEST_TRAIN_EXT = "png"
 SCALE_FACTOR = 32
-DEST_TRAIN_DIR = os.path.join(BASE_DIR, "training_" + DEST_TRAIN_EXT)
+# DEST_TRAIN_DIR = os.path.join(BASE_DIR, "training_" + DEST_TRAIN_EXT)
+DEST_TRAIN_DIR = os.path.join(BASE_DIR, "patch_db_" + DEST_TRAIN_EXT)
 THUMBNAIL_SIZE = 300
 THUMBNAIL_EXT = "jpg"
 
