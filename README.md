@@ -10,11 +10,20 @@ Can we classify different types of brain cancers from whole slide images?
 
 Data was taken from [GDC Cancer Portal](https://gdc.cancer.gov/). 
 
-I used the 1703 primary diagnostic slides from the brain cancer sections. And downloaded:
+I used the 1703 primary diagnostic slides from the brain cancer sections. And downloadedthe following:
 
 1. Manifest (text file)
 1. Clinical data (json)
 1. Metadata (json)
+
+### GDC Downlader Tool:
+
+The following tool, [GDC-Data-Transfer-Tool](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool), was used to download the SVS files onto a google compute instance, at the same time [this process](./_cloud-scripts/continous_transfer_to_bucket.py) transfered them to a Bucket for storage. 
+
+### Building Dataframes:
+
+
+
 
 ## Citations:
 
