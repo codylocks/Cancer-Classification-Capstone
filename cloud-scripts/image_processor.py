@@ -8,13 +8,14 @@ from deephistopath.wsi import slide, tiles
 from deephistopath.wsi import filter as filter_
 from tensorflow.keras.preprocessing.image import load_img, img_to_array, array_to_img
 import time
+import gc
 
 # SET PATHS
 metadata_df_path = './metadata.cart.2020-06-05.json'
 clinical_df_path = './clinical.cart.2020-06-05.json'
 original_svs_files_path = './data/svs_files/'
 tiles_png_path = './data/tiles_png/'
-google_credentials_path = './Capstone-Image-Classifcation-393c7bd67e84.json'
+google_credentials_path = '[YOUR GOOGLE_APPLICATION_CREDENTIALS]'
 
 # Establish Credentals
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = google_credentials_path
@@ -102,19 +103,19 @@ for i in list_to_loop[start::increment]:
     tile_array_array = np.asarray(tile_array_list, dtype = np.int16)
     main_tile_array_array = np.concatenate((main_tile_array_array, tile_array_array))
     main_tile_array_array = main_tile_array_array.astype('int16')
-    np.save(f'./data/main_tile_array_array_upto_batch{i}.npy', main_tile_array_array)
+    np.save('./data/main_tile_array_array_upto_batch{i}.npy', main_tile_array_array)
     np.save('./main_tile_array_array.npy', main_tile_array_array)
 
     # second we save diagnosis list:
     diagnosis_df_temp = pd.DataFrame({'Diagnosis': diagnosis_list})
     diagnosis_df_saved = diagnosis_df_saved.append(diagnosis_df_temp, ignore_index=True)
-    diagnosis_df_saved.to_csv(f'./data/diagnosis_df_saved_upto_batch{i}.csv', index = False)
+    diagnosis_df_saved.to_csv('./data/diagnosis_df_saved_upto_batch{i}.csv', index = False)
     diagnosis_df_saved.to_csv('./diagnosis_df_saved.csv', index = False)
 
     # transfer all files (except svs) to bucket to save
     #remove svs first:
     for svs in os.listdir(os.path.join('data', 'svs_files')):
-        kill_command = f'rm -rf ./data/svs_files/{svs}'
+        kill_command = f'sudo rm -rf ./data/svs_files/{svs}'
         os.system(kill_command)
 
     # copy files to bucket
@@ -122,9 +123,9 @@ for i in list_to_loop[start::increment]:
     os.system(copy_command_string)
 
     # delete files/dirs to prepare for next svs
-    natrins_barrow = 'rm -rf ./data'
-    rebuild_data = 'mkdir data'
-    rebuild_svs_files = 'mkdir data/svs_files'
+    natrins_barrow = 'sudo rm -rf ./data'
+    rebuild_data = 'sudo mkdir data'
+    rebuild_svs_files = 'sudo mkdir data/svs_files'
     for command in [natrins_barrow, rebuild_data, rebuild_svs_files]:
         os.system(command)
 
