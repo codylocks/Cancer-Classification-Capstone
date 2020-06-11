@@ -44,6 +44,8 @@ Arrays are transferred to the bucket using `gsutil` and run through [neural-net.
 
 ## Results:
 
+For full results please see [here](./slidedeck.pdf)
+
 Issues that were not overcome prevented me from building a model using the entire set of data.
 
 A smaller set of data (3600 images) was used and I was able to achieve a testing accuracy of 94.37% and a training accuracy of 94.47%.  
